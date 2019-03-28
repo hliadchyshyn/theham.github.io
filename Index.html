@@ -8,6 +8,10 @@
     <title>The Ham</title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
+    // Add the new slick-theme.css if you want the default styling
+    <link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
+
 </head>
 <body>
 <header class="top-screen-wrapper wrapper">
@@ -48,28 +52,28 @@
     <div class="block-wrapper">
         <div class="divider first-divider-item"></div>
         <div class="rectangle first-rectangle-item">
-            <img src="img/Forma%201.svg" class="pointer-item rectangle-img-item" alt="Pointer">
+            <img src="img/skills/Pointer.svg" class="pointer-item rectangle-img-item" alt="Pointer">
             <p class="first-rectangle-title rectangle-title">Different Theme option</p>
         </div>
     </div>
     <div class="block-wrapper">
         <div class="divider second-divider-item"></div>
         <div class="rectangle second-rectangle-item">
-            <img src="img/Forma%202.svg" class="dimond-item rectangle-img-item" alt="Dimond">
+            <img src="img/skills/Dimond.svg" class="dimond-item rectangle-img-item" alt="Dimond">
             <p class="second-rectangle-title rectangle-title">Fully customizable</p>
         </div>
     </div>
     <div class="block-wrapper">
         <div class="divider third-divider-item-item"></div>
         <div class="rectangle third-rectangle-item">
-            <img src="img/Forma%203.svg" class="bulb-item rectangle-img-item" alt="Bulb">
+            <img src="img/skills/Bulb.svg" class="bulb-item rectangle-img-item" alt="Bulb">
             <p class="first-rectangle-title rectangle-title">Unlimited support</p>
         </div>
     </div>
     <div class="block-wrapper">
         <div class="divider fourth-divider-item"></div>
         <div class="rectangle fourth-rectangle-item">
-            <img src="img/Forma%204.svg" class="device-item rectangle-img-item" alt="Device">
+            <img src="img/skills/Device.svg" class="device-item rectangle-img-item" alt="Device">
             <p class="fourth-rectangle-title rectangle-title">responsive all device</p>
         </div>
     </div>
@@ -79,17 +83,18 @@
         <h2 class="title service-tab-title">Our Services</h2>
         <div class="block-divider"></div>
         <div class="service-tab-content-container">
-            <div class="tab-container">
-                <div class="service-tab-item service-active">Web Design</div>
-                <div class="service-tab-item">Graphic Design</div>
-                <div class="service-tab-item">Online Support</div>
-                <div class="service-tab-item">App Design</div>
-                <div class="service-tab-item">Online Marketing</div>
-                <div class="service-tab-item">Seo Service</div>
+            <div class="tab-container" id='tabContainer'>
+                <div class="service-tab-item service-active" id="webDesign">Web Design</div>
+                <div class="service-tab-item" id="graphicDesign">Graphic Design</div>
+                <div class="service-tab-item" id="onlineSupport">Online Support</div>
+                <div class="service-tab-item" id="appDesign">App Design</div>
+                <div class="service-tab-item" id="onlineMarketing">Online Marketing</div>
+                <div class="service-tab-item" id="seoService">Seo Service</div>
             </div>
             <div class="service-content-item-container">
-                <img src="img/services/Layer1.png" alt="" class="tab-img-item">
-                <p class="tab-content-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                <img src="img/services/web_design.png" alt="" class="tab-img-item" id="tabImgItem">
+                <p class="tab-content-item" id="tabContentItem">Lorem ipsum dolor sit amet, consectetur adipisicing
+                    elit, sed do eiusmod
                     tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident,
                     sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet,
                     consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -112,40 +117,18 @@
         <h2 class="title work-tab-title">Our Amazing Work</h2>
         <div class="block-divider"></div>
         <div class="work-tab-content-container">
-            <div class="tab-container">
-                <div class="work-tab-item work-active">All</div>
-                <div class="work-tab-item">Graphic Design</div>
-                <div class="work-tab-item">Web Design</div>
-                <div class="work-tab-item">Landing Pages</div>
-                <div class="work-tab-item">Wordpress</div>
+            <div class="tab-container" id="workTabContainer">
+                <div class="work-tab-item work-active" id="all">All</div>
+                <div class="work-tab-item" id="workGraphicDesign">Graphic Design</div>
+                <div class="work-tab-item" id="workWebDesign">Web Design</div>
+                <div class="work-tab-item" id="workLandingPage">Landing Pages</div>
+                <div class="work-tab-item" id="workWordpress">Wordpress</div>
             </div>
             <div class="work-img-container">
-                <div class="work-img-item-hover">
-                    <div class="icon-wrapper">
-                        <div class="first-icon-item icon-item">
 
-                        </div>
-                        <div class="second-icon-item icon-item">
-                            <img src="img/work_hover/Layer 23@1X.png" alt="">
-                        </div>
-                    </div>
-                    <h3 class="work-hover-title">creative design</h3>
-                    <p class="work-hover-subtitle">Web Design</p>
-                </div>
-                <div class="work-img-item"></div>
-                <div class="work-img-item"></div>
-                <div class="work-img-item"></div>
-                <div class="work-img-item"></div>
-                <div class="work-img-item"></div>
-                <div class="work-img-item"></div>
-                <div class="work-img-item"></div>
-                <div class="work-img-item"></div>
-                <div class="work-img-item"></div>
-                <div class="work-img-item"></div>
-                <div class="work-img-item"></div>
             </div>
         </div>
-        <div class="work-load-more-btn">
+        <div class="work-load-more-btn" id="loadMoreBtn">
             <div class="btn-text">Load More</div>
         </div>
 
@@ -192,7 +175,7 @@
             </a>
             <a href="#" class="content-item">
                 <img
-                    src="img/BreakingNews/BreakingNews4.png" alt="Blog post">
+                        src="img/BreakingNews/BreakingNews4.png" alt="Blog post">
                 <span class="blog-data">12<br/>Feb</span>
                 <span class="details-info">
                     <span class="details-title">Amazing Blog Post</span>
@@ -258,24 +241,81 @@
         <div class="quotes">
             <img src="img/review/quotes.svg" alt="quotes" class="quotes-item">
         </div>
-        <p class="review-text">
-            Integer dignissim, augue tempus ultricies luctus, quam dui laoreet sem, non dictum odio nisi quis massa. Morbi pulvinar odio eget aliquam facilisis. Tempus ultricies luctus, quam dui laoreet sem, non dictum odio nisi quis massa. Morbi pulvinar odio eget aliquam facilisis.
-        </p>
-        <div class="review-name-wrapper">
-            <p class="review-name">Hasan Ali</p>
-            <p class="review-position">UX Designer</p>
+        <div class="review-item-container">
+            <div class="review-item">
+                <p class="review-text">
+                    Integer dignissim, augue tempus ultricies luctus, quam dui laoreet sem, non dictum odio nisi quis massa.
+                    Morbi pulvinar odio eget aliquam facilisis. Tempus ultricies luctus, quam dui laoreet sem, non dictum
+                    odio nisi quis massa. Morbi pulvinar odio eget aliquam facilisis.
+                </p>
+                <div class="review-name-wrapper">
+                    <p class="review-name">Hasan Ali</p>
+                    <p class="review-position">UX Designer</p>
+                </div>
+                <div class="review-author-photo-active first-review-photo">
+                </div>
+            </div>
+            <div class="review-item">
+                <p class="review-text">
+                    Integer dignissim, augue tempus ultricies luctus, quam dui laoreet sem, non dictum odio nisi quis massa.
+                    Morbi pulvinar odio eget aliquam facilisis. Tempus ultricies luctus, quam dui laoreet sem, non dictum
+                    odio nisi quis massa. Morbi pulvinar odio eget aliquam facilisis.
+                </p>
+                <div class="review-name-wrapper">
+                    <p class="review-name">Julia Wagner</p>
+                    <p class="review-position">UX/UI Designer</p>
+                </div>
+                <div class="review-author-photo-active second-review-photo">
+                </div>
+            </div>
+            <div class="review-item">
+                <p class="review-text">
+                    Integer dignissim, augue tempus ultricies luctus, quam dui laoreet sem, non dictum odio nisi quis massa.
+                    Morbi pulvinar odio eget aliquam facilisis. Tempus ultricies luctus, quam dui laoreet sem, non dictum
+                    odio nisi quis massa. Morbi pulvinar odio eget aliquam facilisis.
+                </p>
+                <div class="review-name-wrapper">
+                    <p class="review-name">Gustav Lindberg</p>
+                    <p class="review-position">Front-end developer</p>
+                </div>
+                <div class="review-author-photo-active third-review-photo">
+                </div>
+            </div>
+            <div class="review-item">
+                <p class="review-text">
+                    Integer dignissim, augue tempus ultricies luctus, quam dui laoreet sem, non dictum odio nisi quis massa.
+                    Morbi pulvinar odio eget aliquam facilisis. Tempus ultricies luctus, quam dui laoreet sem, non dictum
+                    odio nisi quis massa. Morbi pulvinar odio eget aliquam facilisis.
+                </p>
+                <div class="review-name-wrapper">
+                    <p class="review-name">Mary Hofssteder</p>
+                    <p class="review-position">Graphic Designer</p>
+                </div>
+                <div class="review-author-photo-active fourth-review-photo">
+                </div>
+            </div>
         </div>
-        <div class="review-author-photo-active">
-        </div>
-        <div class="review-author-photo-wrapper">
-            <div class="angle-left"></div>
+        <div class="review-author-photo-wrapper" id="reviewAuthorContainer" >
+            <!--<div class="angle-left"></div>-->
+            <img src="img/review/reviewAuthors/Photo0.png" alt="Author photo"
+                 class="review-author-photo-item review-author-photo-item-active">
             <img src="img/review/reviewAuthors/Photo1.png" alt="Author photo" class="review-author-photo-item">
             <img src="img/review/reviewAuthors/Photo2.png" alt="Author photo" class="review-author-photo-item">
-            <img src="img/review/reviewAuthors/Photo0.png" alt="Author photo" class="review-author-photo-item review-author-photo-item-active">
             <img src="img/review/reviewAuthors/Photo3.png" alt="Author photo" class="review-author-photo-item">
-            <div class="angle-right"></div>
+            <!--<div class="angle-right"></div>-->
         </div>
     </div>
 </section>
+<footer class="bot-screen-wrapper wrapper">
+    <div class="copyright-container">
+        <p class="copyright-text">© Copyright 2015 <span class="text-green">theHam</span> | All Rights Reserved</p>
+    </div>
+</footer>
+<script
+        src="http://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+<script type="text/javascript" src="slick/slick.min.js"></script>
+<script src="js/script.js"></script>
 </body>
 </html>
