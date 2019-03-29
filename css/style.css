@@ -353,7 +353,12 @@ body {
 .work-img-item{
     width: 285px;
     height: 207px;
-    background-color: #1c2a33;
+    /*background-color: #1c2a33;*/
+
+}
+
+.work-img-item-block{
+    position: relative;
 }
 
 .work-img-item-hover{
@@ -363,6 +368,10 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
 
 }
 
@@ -379,7 +388,7 @@ body {
     height: 40px;
     border-radius: 50%;
     border: solid 1px #18cfab;
-    /*background: linear-gradient(rgba(24, 207, 171, 1), rgba(24, 207, 171, 1)), url('../img/work_hover/Forma1.svg') no-repeat center;*/
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -387,10 +396,19 @@ body {
 
 .first-icon-item{
     background: url('../img/works/work_hover/Forma1.svg') no-repeat center;
+}
 
+.first-icon-item:hover{
+    background: linear-gradient(rgba(24, 207, 171, 1), rgba(24, 207, 171, 1)), url('../img/works/work_hover/Forma1.svg') no-repeat center;
 }
 
 .second-icon-item{
+    background: url('../img/works/work_hover/iconfinder_icon-111-search_314478.svg') no-repeat center;
+    background-size: 70%;
+    /*background: #18cfab;*/
+}
+
+.second-icon-item:hover{
     /*background: url('../img/work_hover/Layer 23@1X.png') no-repeat center;*/
     background: #18cfab;
 }

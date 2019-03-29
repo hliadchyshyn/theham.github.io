@@ -236,11 +236,23 @@ function addImg(arr, offset, number) {
     let workImgItems = $(document.createDocumentFragment());
     let loopEnd = arr.length - (offset + number) > 0 ? offset + number : arr.length;
     for (offset; offset < loopEnd; offset++) {
-        workImgItems = workImgItems.append($('<img src="" alt="work-example" class="work-img-item">'));
+        workImgItems = workImgItems.append($(`<div class="work-img-item-block">
+            <img src="" alt="work-example" class="work-img-item" id="itemImg${offset}">
+            <div class="work-img-item-hover" id="itemHover${offset}">
+            <div class="icon-wrapper">
+            <div class="first-icon-item icon-item"></div>
+            <div class="second-icon-item icon-item">
+            <img src="img/works/work_hover/Layer 23@1X.png" alt="">
+            </div>
+            </div>
+            <h3 class="work-hover-title">creative design</h3>
+            <p class="work-hover-subtitle">Web Design</p>
+            </div>
+            </div>`));
     }
     let workContainer = workImgItems[0].children;
     for (let item of workContainer) {
-        $(item).attr('src', arr[($(item).index() + workImgContainer.children.length)].img);
+        $(item.children[0]).attr('src', arr[($(item).index() + workImgContainer.children.length)].img);
     }
     workImgContainer.append(workImgItems[0]);
 }
@@ -250,7 +262,7 @@ function changeWorkTab() {
     const workTabContainer = $('#workTabContainer');
     $(workTabContainer).click((event) => {
         let currentCategory = event.target.id;
-        categoryArray = currentCategory === 'all' ? workContent : workContent.filter((item, index)=>{
+        categoryArray = currentCategory === 'all' ? workContent : workContent.filter((item, index) => {
             return workContent[index].category === currentCategory;
         });
         let isActive = event.target.classList.contains('work-active');
@@ -263,7 +275,7 @@ function changeWorkTab() {
         if ($('.work-img-container')[0].children.length === categoryArray.length) {
             $(loadMoreBtn).hide()
 
-        }else {
+        } else {
             $(loadMoreBtn).show()
         }
     });
@@ -277,32 +289,20 @@ function changeWorkTab() {
     });
 }
 
+function slowScroll(className) {
+    $(className).on("click", function (event) {
+        event.preventDefault();
 
-function changeReview(target) {
-    target.click((event) => {
-        // let isActive = event.target.classList.contains('slick-current');
-        if (event.target.classList.contains('review-author-photo-item')) {
-            $(`.review-author-photo-item`).removeClass('review-author-photo-item-active');
-            $(event.target).addClass('review-author-photo-item-active');
-        }
+        let scrollTo = $(this).attr('href'),
+            top = $(scrollTo).offset().top;
+        $('body,html').animate({
+            scrollTop: top
+        }, 1000);
     });
 }
 
 
-// const workHover = $('<div class="work-img-item-hover">\n' +
-//     '                    <div class="icon-wrapper">\n' +
-//     '                        <div class="first-icon-item icon-item">\n' +
-//     '\n' +
-//     '                        </div>\n' +
-//     '                        <div class="second-icon-item icon-item">\n' +
-//     '                            <img src="img/works/work_hover/Layer 23@1X.png" alt="">\n' +
-//     '                        </div>\n' +
-//     '                    </div>\n' +
-//     '                    <h3 class="work-hover-title">creative design</h3>\n' +
-//     '                    <p class="work-hover-subtitle">Web Design</p>\n' +
-//     '                </div>');
-
-$(document).ready(function(){
+$(document).ready(function () {
     $('.review-item-container').slick({
         arrows: true,
         // asNavFor: '.review-author-photo-wrapper' // указываем что навигация для слайдера будет отдельно (указываем класс куда вешаем навигацию)
@@ -316,15 +316,31 @@ $('.review-author-photo-wrapper').slick({ // настройка навигаци
     focusOnSelect: true // указываем что бы слайделось по клику
 });
 
+
+$('.review-item-container').on('beforeChange', function (event, slick, currentSlide, nextSlide) {
+    // console.log(nextSlide);
+    $(`.review-author-photo-item`).removeClass('review-author-photo-item-active');
+    let nextItem = $('.review-author-photo-item')[nextSlide];
+    $(nextItem).addClass('review-author-photo-item-active');
+});
+
+
 changeServiceTab();
 changeWorkTab();
-const reviewAuthorContainer = $('#reviewAuthorContainer');
-changeReview(reviewAuthorContainer);
 addImg(workContent, 0, 12);
+slowScroll('.nav-item');
 
-$('.review-item-container').on('beforeChange', function(event, slick, currentSlide, nextSlide){
-    // console.log(nextSlide);
-        $(`.review-author-photo-item`).removeClass('review-author-photo-item-active');
-        let nextItem = $('.review-author-photo-item')[nextSlide];
-        $(nextItem).addClass('review-author-photo-item-active');
+const imgItemBlock = $('.work-img-item-block');
+$(imgItemBlock).hover(function () {
+    let id = $(event.currentTarget).index();
+    $(`.work-img-item-block > #itemImg${id}`).css('opacity', '0');
+    $(`.work-img-item-block > #itemHover${id}`).css('opacity', '1');
+
+}, function () {
+    let id = $(event.currentTarget).index();
+    $(`.work-img-item-block > #itemImg${id}`).css('opacity', '1');
+    $(`.work-img-item-block > #itemHover${id}`).css('opacity', '0');
+
+
+
 });
