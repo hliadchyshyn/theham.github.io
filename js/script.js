@@ -277,19 +277,17 @@ function changeWorkTab() {
     });
 }
 
-function changeReview() {
-    const reviewAuthorContainer = $('#reviewAuthorContainer');
-    $(reviewAuthorContainer).click((event) => {
-        let isActive = event.target.classList.contains('review-author-photo-item-active');
-        const tabName = event.target.id;
-        if (!isActive) {
+
+function changeReview(target) {
+    target.click((event) => {
+        // let isActive = event.target.classList.contains('slick-current');
+        if (event.target.classList.contains('review-author-photo-item')) {
             $(`.review-author-photo-item`).removeClass('review-author-photo-item-active');
             $(event.target).addClass('review-author-photo-item-active');
-            // $("#tabImgItem").attr('src', serviceContent.find(item => item.id === tabName).img);
-            // $('#tabContentItem')[0].textContent = serviceContent.find(item => item.id === tabName).content;
         }
     });
 }
+
 
 // const workHover = $('<div class="work-img-item-hover">\n' +
 //     '                    <div class="icon-wrapper">\n' +
@@ -308,10 +306,7 @@ $(document).ready(function(){
     $('.review-item-container').slick({
         arrows: true,
         // asNavFor: '.review-author-photo-wrapper' // указываем что навигация для слайдера будет отдельно (указываем класс куда вешаем навигацию)
-        customPaging : function(slider, i) {
-            let thumb = $(slider.$slides[i]).data('thumb');
-            return '<a class="review-author-photo-item"></a>';
-        },
+        nextArrow: $('.angle-right')[0],
     });
 });
 
@@ -323,8 +318,13 @@ $('.review-author-photo-wrapper').slick({ // настройка навигаци
 
 changeServiceTab();
 changeWorkTab();
-changeReview();
+const reviewAuthorContainer = $('#reviewAuthorContainer');
+changeReview(reviewAuthorContainer);
 addImg(workContent, 0, 12);
 
-
-
+$('.review-item-container').on('beforeChange', function(event, slick, currentSlide, nextSlide){
+    // console.log(nextSlide);
+        $(`.review-author-photo-item`).removeClass('review-author-photo-item-active');
+        let nextItem = $('.review-author-photo-item')[nextSlide];
+        $(nextItem).addClass('review-author-photo-item-active');
+});
