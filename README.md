@@ -1,6 +1,6 @@
 # theham.github.io
 
-# Step project with uisng:
+# Step project with using:
 * HTML
 * CSS
 * JavaSript
