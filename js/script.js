@@ -267,11 +267,12 @@ function changeWorkTab() {
         });
         let isActive = event.target.classList.contains('work-active');
         if (!isActive) {
-            $(`#workTabContainer > .work-tab-item`).removeClass('work-active');
+            $(`.work-tab-item`).removeClass('work-active');
             $(event.target).addClass('work-active');
-            $('.work-img-item').remove();
+            $('.work-img-item-block').remove();
             addImg(categoryArray, 0, 12);
         }
+        workHover();
         if ($('.work-img-container')[0].children.length === categoryArray.length) {
             $(loadMoreBtn).hide()
 
@@ -286,6 +287,7 @@ function changeWorkTab() {
         if ($('.work-img-container')[0].children.length === categoryArray.length) {
             $(loadMoreBtn).hide()
         }
+        workHover();
     });
 }
 
@@ -301,46 +303,48 @@ function slowScroll(className) {
     });
 }
 
-
-$(document).ready(function () {
-    $('.review-item-container').slick({
-        arrows: true,
-        // asNavFor: '.review-author-photo-wrapper' // указываем что навигация для слайдера будет отдельно (указываем класс куда вешаем навигацию)
-        nextArrow: $('.angle-right')[0],
+function slickCarousel() {
+    $(document).ready(function () {
+        $('.review-item-container').slick({
+            arrows: true,
+            // asNavFor: '.review-author-photo-wrapper' // указываем что навигация для слайдера будет отдельно (указываем класс куда вешаем навигацию)
+            nextArrow: $('.angle-right')[0],
+        });
     });
-});
 
-$('.review-author-photo-wrapper').slick({ // настройка навигации
-    slidesToShow: 4, // указываем что нужно показывать 3 навигационных изображения
-    asNavFor: '.review-item-container', // указываем что это навигация для блока выше
-    focusOnSelect: true // указываем что бы слайделось по клику
-});
-
-
-$('.review-item-container').on('beforeChange', function (event, slick, currentSlide, nextSlide) {
-    // console.log(nextSlide);
-    $(`.review-author-photo-item`).removeClass('review-author-photo-item-active');
-    let nextItem = $('.review-author-photo-item')[nextSlide];
-    $(nextItem).addClass('review-author-photo-item-active');
-});
+    $('.review-author-photo-wrapper').slick({ // настройка навигации
+        slidesToShow: 4, // указываем что нужно показывать 3 навигационных изображения
+        asNavFor: '.review-item-container', // указываем что это навигация для блока выше
+        focusOnSelect: true // указываем что бы слайделось по клику
+    });
 
 
+    $('.review-item-container').on('beforeChange', function (event, slick, currentSlide, nextSlide) {
+        // console.log(nextSlide);
+        $(`.review-author-photo-item`).removeClass('review-author-photo-item-active');
+        let nextItem = $('.review-author-photo-item')[nextSlide];
+        $(nextItem).addClass('review-author-photo-item-active');
+    });
+}
+
+function workHover() {
+    const imgItemBlock = $('.work-img-item-block');
+    $(imgItemBlock).hover(function () {
+        let id = $(event.currentTarget).index();
+        $(`.work-img-item-block > #itemImg${id}`).css('opacity', '0');
+        $(`.work-img-item-block > #itemHover${id}`).css('opacity', '1');
+
+    }, function () {
+        let id = $(event.currentTarget).index();
+        $(`.work-img-item-block > #itemImg${id}`).css('opacity', '1');
+        $(`.work-img-item-block > #itemHover${id}`).css('opacity', '0');
+    });
+}
+
+slickCarousel();
 changeServiceTab();
 changeWorkTab();
 addImg(workContent, 0, 12);
 slowScroll('.nav-item');
+workHover();
 
-const imgItemBlock = $('.work-img-item-block');
-$(imgItemBlock).hover(function () {
-    let id = $(event.currentTarget).index();
-    $(`.work-img-item-block > #itemImg${id}`).css('opacity', '0');
-    $(`.work-img-item-block > #itemHover${id}`).css('opacity', '1');
-
-}, function () {
-    let id = $(event.currentTarget).index();
-    $(`.work-img-item-block > #itemImg${id}`).css('opacity', '1');
-    $(`.work-img-item-block > #itemHover${id}`).css('opacity', '0');
-
-
-
-});
