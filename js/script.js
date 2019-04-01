@@ -231,12 +231,13 @@ function changeServiceTab() {
     });
 }
 
-function addImg(arr, offset, number) {
-    let workImgContainer = $('.work-img-container')[0];
-    let workImgItems = $(document.createDocumentFragment());
+function addImg(arr, offset, number, parent, block) {
+    let imgItem = $('');
+    let imgItems = $(document.createDocumentFragment());
     let loopEnd = arr.length - (offset + number) > 0 ? offset + number : arr.length;
     for (offset; offset < loopEnd; offset++) {
-        workImgItems = workImgItems.append($(`<div class="work-img-item-block">
+        if (block === 'Work') {
+            imgItem = $(`<div class="work-img-item-block">
             <img src="" alt="work-example" class="work-img-item" id="itemImg${offset}">
             <div class="work-img-item-hover" id="itemHover${offset}">
             <div class="icon-wrapper">
@@ -248,13 +249,25 @@ function addImg(arr, offset, number) {
             <h3 class="work-hover-title">creative design</h3>
             <p class="work-hover-subtitle">Web Design</p>
             </div>
-            </div>`));
+            </div>`)
+        } else {
+            imgItem = $(`<div class="gallery-wrapper-item">
+                            <img src= ${arr[offset]} alt="gallery-image" >
+                            <div class="cover-item-gallery" id="coverItem${offset}">
+                                <a href="" class="cover-item-gallery-link">
+                                    <i class="cover-item-search cover-item-gallery-item fa fa-search fa-2x"></i>
+                                    <i class="cover-item-expand fas fa-expand-arrows-alt fa-2x"></i>
+                                </a>
+                            </div>
+                        </div>`);
+        }
+        imgItems = imgItems.append(imgItem);
     }
-    let workContainer = workImgItems[0].children;
-    for (let item of workContainer) {
-        $(item.children[0]).attr('src', arr[($(item).index() + workImgContainer.children.length)].img);
+    let endContainer = imgItems[0].children;
+    for (let item of endContainer) {
+        $(item.children[0]).attr('src', arr[($(item).index() + parent.children.length)].img);
     }
-    workImgContainer.append(workImgItems[0]);
+    parent.append(imgItems[0]);
 }
 
 function changeWorkTab() {
@@ -270,22 +283,22 @@ function changeWorkTab() {
             $(`.work-tab-item`).removeClass('work-active');
             $(event.target).addClass('work-active');
             $('.work-img-item-block').remove();
-            addImg(categoryArray, 0, 12);
+            addImg(categoryArray, 0, 12, workImgContainer, 'Work');
         }
         workHover();
         if ($('.work-img-container')[0].children.length === categoryArray.length) {
-            $(loadMoreBtn).hide()
+            $(workLoadMoreBtn).hide()
 
         } else {
-            $(loadMoreBtn).show()
+            $(workLoadMoreBtn).show()
         }
     });
 
-    let loadMoreBtn = $('#loadMoreBtn');
-    $(loadMoreBtn).click(() => {
-        addImg(categoryArray, $('.work-img-container')[0].children.length, 12);
+    let workLoadMoreBtn = $('#workLoadMoreBtn');
+    $(workLoadMoreBtn).click(() => {
+        addImg(categoryArray, $('.work-img-container')[0].children.length, 12, workImgContainer, 'Work');
         if ($('.work-img-container')[0].children.length === categoryArray.length) {
-            $(loadMoreBtn).hide()
+            $(workLoadMoreBtn).hide()
         }
         workHover();
     });
@@ -329,30 +342,120 @@ function slickCarousel() {
 
 function workHover() {
     const imgItemBlock = $('.work-img-item-block');
-    $(imgItemBlock).hover(function () {
-        let id = $(event.currentTarget).index();
-        $(`.work-img-item-block > #itemImg${id}`).css('opacity', '0');
-        $(`.work-img-item-block > #itemHover${id}`).css('opacity', '1');
+    $(imgItemBlock).hover(
+        function () {
+            let id = $(event.currentTarget).index();
+            $(`.work-img-item-block > #itemImg${id}`).css('opacity', '0');
+            $(`.work-img-item-block > #itemHover${id}`).css('opacity', '1');
 
-    }, function () {
-        let id = $(event.currentTarget).index();
-        $(`.work-img-item-block > #itemImg${id}`).css('opacity', '1');
-        $(`.work-img-item-block > #itemHover${id}`).css('opacity', '0');
-    });
+
+        }, function () {
+            let id = $(event.currentTarget).index();
+            $(`.work-img-item-block > #itemImg${id}`).css('opacity', '1');
+            $(`.work-img-item-block > #itemHover${id}`).css('opacity', '0');
+
+        });
 }
 
-function masontyInit(){
-    $('.gallery-wrapper').masonry({
-        columnWidth: 370,
-        itemSelector: '.gallery-wrapper-item'
+function masonryInit() {
+    let galleryContainer = $('.gallery-wrapper');
+    galleryContainer.masonry({
+        columnWidth: 50,
+        itemSelector: '.gallery-wrapper-item',
+        gutter: 15,
+        isAnimated: true,
+
     });
+    $(galleryContainer).imagesLoaded().progress( function() {
+        galleryContainer.masonry('reloadItems');
+        galleryContainer.masonry('layout');
+    });
+
+
+
+
 }
+
+function galleryHover() {
+    $('.gallery-wrapper-item').hover(
+        function () {
+            $(this).find('.cover-item-gallery').fadeIn();
+        },
+        function () {
+            $(this).find('.cover-item-gallery').fadeOut();
+        }
+    );
+}
+
+function addGalleryImages() {
+    const imageArray = [
+        'img/gallery/Gallery0.jpg',
+        'img/gallery/Gallery1.png',
+        'img/gallery/Gallery2.png',
+        'img/gallery/Gallery3.png',
+        'img/gallery/Gallery4.png',
+        'img/gallery/Gallery5.png',
+        'img/gallery/Gallery6.png',
+        'img/gallery/Gallery7.png',
+        'img/gallery/Gallery8.png',
+        'img/gallery/Gallery9.png',
+        'img/gallery/Gallery10.png',
+        'img/gallery/Gallery11.png',
+        'img/gallery/Gallery12.png',
+        'img/gallery/Gallery13.png',
+        'img/gallery/Gallery14.png',
+        'img/gallery/Gallery15.png',
+        'img/gallery/Gallery16.png',
+        'img/gallery/Gallery17.png',
+        'img/gallery/Gallery18.jpg',
+        'img/gallery/Gallery19.jpg',
+        'img/gallery/Gallery20.jpg',
+        'img/gallery/Gallery21.jpg',
+        'img/gallery/Gallery22.jpg',
+        'img/gallery/Gallery23.jpg',
+        'img/gallery/Gallery24.jpg',
+        'img/gallery/Gallery25.jpg',
+        'img/gallery/Gallery26.jpg',
+        'img/gallery/Gallery27.jpg',
+        'img/gallery/Gallery28.jpg',
+        'img/gallery/Gallery29.jpg',
+        'img/gallery/Gallery30.jpg',
+        'img/gallery/Gallery31.jpg',
+        'img/gallery/Gallery32.jpg',
+        'img/gallery/Gallery33.jpg',
+        'img/gallery/Gallery34.jpg',
+        'img/gallery/Gallery35.jpg',
+        'img/gallery/Gallery36.jpg',
+
+    ];
+    // let galleryImgContainer = $('.gallery-wrapper')[0];
+    const limitGalleryImg = imageArray.length;
+    let galleryLoadMoreBtn = $('#galleryLoadMoreBtn');
+    $(galleryLoadMoreBtn).click(() => {
+        let galleryImgContainer = $('.gallery-wrapper')[0];
+        addImg(imageArray, galleryImgContainer.children.length, 12, galleryImgContainer, 'Gallery');
+        $(galleryImgContainer).imagesLoaded().progress( function() {
+            $(galleryImgContainer).masonry('reloadItems');
+            $(galleryImgContainer).masonry('layout');
+        });
+
+        if (galleryImgContainer.children.length === limitGalleryImg) {
+            $(galleryLoadMoreBtn).hide()
+        }
+        galleryHover();
+    });
+
+}
+
 
 slickCarousel();
 changeServiceTab();
 changeWorkTab();
-addImg(workContent, 0, 12);
+let workImgContainer = $('.work-img-container')[0];
+addImg(workContent, 0, 12, workImgContainer, 'Work');
 slowScroll('.nav-item');
 workHover();
-masontyInit();
+masonryInit();
+addGalleryImages();
+galleryHover();
 
