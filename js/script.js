@@ -341,10 +341,18 @@ function workHover() {
     });
 }
 
+function masontyInit(){
+    $('.gallery-wrapper').masonry({
+        columnWidth: 370,
+        itemSelector: '.gallery-wrapper-item'
+    });
+}
+
 slickCarousel();
 changeServiceTab();
 changeWorkTab();
 addImg(workContent, 0, 12);
 slowScroll('.nav-item');
 workHover();
+masontyInit();
 
