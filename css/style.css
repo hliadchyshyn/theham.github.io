@@ -23,16 +23,18 @@ body {
 }
 
 .header-wrapper {
-    width: 100vw;
+    /*width: 100%;*/
+    width: 1160px;
     height: 120px;
     background-color: #1c2a33;
     opacity: 0.6;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .logo-wrapper{
-    margin-left: 390px;
+    /*margin-left: 390px;*/
     position: relative;
 }
 
@@ -648,6 +650,10 @@ body {
     box-shadow: 0 0 0 6px rgba(17, 76, 75, 0.6);
     box-sizing: border-box;
     position: relative;
+}
+
+.review-author-photo-item:focus, .review-item:focus{
+    outline: none;
 }
 
 .review-author-photo-item-active{
